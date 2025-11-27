@@ -1,11 +1,10 @@
 # 🐾 PetCare - Scripts SQL (Entrega 4)
 
 ![SQL Badge](https://img.shields.io/badge/SQL-Structured%20Query%20Language-blue)
-![Status Badge](https://img.shields.io/badge/Status-Complete-brightgreen)
-![License Badge](https://img.shields.io/badge/License-MIT-yellow)
+![Status Badge](https://img.shields.io/badge/Status-Completo-brightgreen)
 
 ## 📖 Descrição
-Repositório contendo scripts SQL para criação, povoamento e manipulação do banco de dados do **PetCare**, sistema de gerenciamento de clínica veterinária. Inclui evidências (prints) das consultas realizadas no Supabase.
+Repositório com scripts SQL para criação, povoamento e manipulação do banco de dados do **PetCare**, sistema de gerenciamento de clínica veterinária. Inclui evidências (prints) das consultas no Supabase.
 
 O projeto cobre:
 - 🏗️ Criação de tabelas e relacionamentos
@@ -28,6 +27,23 @@ O projeto cobre:
 
 ---
 
+## 🚀 Como rodar / Getting Started
+
+Para executar este projeto:
+
+1. Certifique-se de ter um banco de dados PostgreSQL ou Supabase disponível.
+2. Execute os scripts na seguinte ordem:
+   1. `01_schema_and_triggers.sql` – cria tabelas, índices e triggers
+   2. `02_inserts.sql` – insere dados de exemplo
+   3. `03_selects.sql` – executa consultas para verificação
+   4. `04_updates_deletes.sql` – executa exemplos de UPDATE e DELETE
+3. Revise os SELECTs antes de executar DELETEs para evitar perda de dados.
+4. Confira os prints na pasta do projeto para validação visual das consultas.
+
+> 💡 Dica: você pode usar o Supabase para rodar os scripts e verificar as evidências rapidamente.
+
+---
+
 ## ▶️ Ordem de execução recomendada
 1. `01_schema_and_triggers.sql`
 2. `02_inserts.sql`
@@ -46,4 +62,4 @@ O projeto cobre:
 ---
 
 ## 🖊️ Autor
-- **Nome:** Cristiane Rodrigues de Moraes  
+- **Nome:** Cristiane Rodrigues de Moraes
