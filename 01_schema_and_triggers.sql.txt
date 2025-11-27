@@ -1,0 +1,86 @@
+-- SCHEMA COMPLETO DO PETCARE
+
+CREATE TABLE tutor (
+    tutor_id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    telefone VARCHAR(20),
+    email VARCHAR(100) UNIQUE,
+    cpf VARCHAR(20) UNIQUE
+);
+
+CREATE TABLE pet (
+    pet_id SERIAL PRIMARY KEY,
+    tutor_id INT REFERENCES tutor(tutor_id),
+    nome VARCHAR(100),
+    especie VARCHAR(50),
+    raca VARCHAR(50),
+    nascimento DATE
+);
+
+CREATE TABLE servico (
+    serv_id SERIAL PRIMARY KEY,
+    nome VARCHAR(100),
+    valor_padrao NUMERIC(10,2)
+);
+
+CREATE TABLE medicamento (
+    medic_id SERIAL PRIMARY KEY,
+    nome_comercial VARCHAR(100),
+    principio_ativo VARCHAR(100),
+    estoque INT
+);
+
+CREATE TABLE atendimento (
+    atend_id SERIAL PRIMARY KEY,
+    pet_id INT REFERENCES pet(pet_id),
+    data_atend TIMESTAMP,
+    observacoes TEXT
+);
+
+CREATE TABLE atendimento_servico (
+    atend_serv_id SERIAL PRIMARY KEY,
+    atend_id INT REFERENCES atendimento(atend_id),
+    serv_id INT REFERENCES servico(serv_id),
+    quantidade INT,
+    valor_unitario NUMERIC(10,2),
+    subtotal NUMERIC(10,2)
+);
+
+CREATE TABLE fatura (
+    fatura_id SERIAL PRIMARY KEY,
+    atend_id INT REFERENCES atendimento(atend_id),
+    valor_total NUMERIC(10,2),
+    pago BOOLEAN DEFAULT FALSE
+);
+
+CREATE OR REPLACE FUNCTION calcular_subtotal()
+RETURNS TRIGGER AS $$
+BEGIN
+    NEW.subtotal := NEW.quantidade * NEW.valor_unitario;
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_calcular_subtotal
+BEFORE INSERT OR UPDATE ON atendimento_servico
+FOR EACH ROW EXECUTE FUNCTION calcular_subtotal();
+
+CREATE OR REPLACE FUNCTION atualizar_fatura()
+RETURNS TRIGGER AS $$
+BEGIN
+    UPDATE fatura
+    SET valor_total = (
+        SELECT SUM(subtotal)
+        FROM atendimento_servico
+        WHERE atend_id = NEW.atend_id
+    )
+    WHERE atend_id = NEW.atend_id;
+
+    RETURN NEW;
+END;
+$$ LANGUAGE plpgsql;
+
+CREATE TRIGGER trg_atualizar_fatura
+AFTER INSERT OR UPDATE ON atendimento_servico
+FOR EACH ROW
+EXECUTE FUNCTION atualizar_fatura();
