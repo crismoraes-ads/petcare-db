@@ -1,0 +1,49 @@
+# 🐾 PetCare - Scripts SQL (Entrega 4)
+
+![SQL Badge](https://img.shields.io/badge/SQL-Structured%20Query%20Language-blue)
+![Status Badge](https://img.shields.io/badge/Status-Complete-brightgreen)
+![License Badge](https://img.shields.io/badge/License-MIT-yellow)
+
+## 📖 Descrição
+Repositório contendo scripts SQL para criação, povoamento e manipulação do banco de dados do **PetCare**, sistema de gerenciamento de clínica veterinária. Inclui evidências (prints) das consultas realizadas no Supabase.
+
+O projeto cobre:
+- 🏗️ Criação de tabelas e relacionamentos
+- 📝 Inserção de dados de exemplo
+- 🔍 Consultas de verificação
+- ✏️ Atualizações e exclusões de dados
+- ⚡ Triggers para automatizar cálculos de subtotais e faturas
+
+---
+
+## 📂 Estrutura dos arquivos
+
+| Arquivo | Descrição |
+|---------|-----------|
+| `01_schema_and_triggers.sql` | Criação de tabelas, índices e triggers do sistema. |
+| `02_inserts.sql` | Inserção de dados de exemplo em todas as tabelas. |
+| `03_selects.sql` | Consultas de verificação para validar os dados inseridos. |
+| `04_updates_deletes.sql` | Exemplos de atualizações (`UPDATE`) e exclusões (`DELETE`). |
+| Prints | Evidências das consultas no Supabase: `01_tables.png`, `02_atendimento_servico.png`, `03_verificacoes_tutor_servico.png`, `04_medicamento.png`. |
+
+---
+
+## ▶️ Ordem de execução recomendada
+1. `01_schema_and_triggers.sql`
+2. `02_inserts.sql`
+3. `03_selects.sql`
+4. `04_updates_deletes.sql`
+
+> ⚠️ **Observação:** Sempre revise os `SELECTs` antes de executar `DELETEs` para evitar perda de dados importantes.
+
+---
+
+## ✨ Funcionalidades extras
+- **Triggers automáticas:**  
+  - 🧾 Cálculo do `subtotal` em `atendimento_servico`  
+  - 💰 Recalculo e atualização automática de faturas ao alterar atendimentos ou serviços  
+
+---
+
+## 🖊️ Autor
+- **Nome:** Cristiane Rodrigues de Moraes  
